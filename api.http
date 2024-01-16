@@ -1,0 +1,26 @@
+# Exemplo de POST para criar um usuário
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "name": "Test User",
+  "password": "testpassword"
+}
+
+# Exemplo de GET para obter todos os usuários
+GET http://localhost:3000/users
+
+# Exemplo de GET para obter um usuário específico pelo ID
+GET http://localhost:3000/users/1
+
+# Exemplo de PUT para atualizar um usuário existente
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "email": "updated@example.com"
+}
+
+# Exemplo de DELETE para excluir um usuário pelo ID
+DELETE http://localhost:3000/users/1
