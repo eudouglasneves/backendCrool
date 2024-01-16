@@ -1,20 +1,20 @@
-# Exemplo de POST para criar um usuário
+### POST para criar um usuário
 POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
-  "name": "Test User",
+  "email": "douglas@email.com",
+  "name": "Douglas Neves",
   "password": "testpassword"
 }
 
-# Exemplo de GET para obter todos os usuários
+### GET para obter todos os usuários
 GET http://localhost:3000/users
 
-# Exemplo de GET para obter um usuário específico pelo ID
+### GET para obter um usuário específico pelo ID
 GET http://localhost:3000/users/1
 
-# Exemplo de PUT para atualizar um usuário existente
+### PUT para atualizar um usuário existente
 PUT http://localhost:3000/users/1
 Content-Type: application/json
 
@@ -22,5 +22,41 @@ Content-Type: application/json
   "email": "updated@example.com"
 }
 
-# Exemplo de DELETE para excluir um usuário pelo ID
-DELETE http://localhost:3000/users/1
+### DELETE para excluir um usuário pelo ID
+DELETE http://localhost:3000/users/2
+
+
+### Categoria
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Doces"
+}
+
+### Obter todas as Categorias
+GET http://localhost:3000/category
+
+### Criação de um Produto 
+POST http://localhost:3000/product
+Content-Type: application/json
+
+{
+  "title": "Bala de Goma",
+  "price": 1,
+  "categoryID": 1
+}
+
+### Obter todos os Produtos
+GET http://localhost:3000/product
+
+### Atualização de um Produto 
+PUT http://localhost:3000/product/:id
+Content-Type: application/json
+
+{
+  "title": "Bala de Goma Atualizada"
+}
+
+### Exclusão de um Produto
+DELETE http://localhost:3000/product/:id

@@ -26,7 +26,7 @@ model Category {
 model Product {
   id         Int      @id @default(autoincrement())
   title      String
-  price      Boolean
+  price      Float
   category   Category @relation(fields: [categoryID], references: [id])
   categoryID Int
 }
