@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Header, Res } from '@nestjs/common';
 import { SellerService } from './seller.service';
 import { Seller } from '@prisma/client';
 
@@ -6,8 +6,12 @@ import { Seller } from '@prisma/client';
 export class SellerController {
   constructor(private readonly sellerService: SellerService) {}
   @Get()
-  findAll(): Promise<Seller[]> {
-    return this.sellerService.findAll();
+  @Header('Content-Range', 'sellers 0-10/100')
+  async findAll(@Res() res): Promise<Seller[]> {
+    const sellers = await this.sellerService.findAll();
+    const total = await this.sellerService.getTotalSellers(); // Adicione este método ao seu service para obter o número total de usuários
+    res.header('Content-Range', `sellers 0-${sellers.length}/${total}`);
+    return res.status(200).json(sellers);
   }
 
   @Get(':id')

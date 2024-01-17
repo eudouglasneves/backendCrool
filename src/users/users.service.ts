@@ -35,4 +35,8 @@ export class UserService {
       where: { id },
     });
   }
+  
+  async getTotalUsers(): Promise<number> {
+    return this.prisma.user.count();
+  }
 }

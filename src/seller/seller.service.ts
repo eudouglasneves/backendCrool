@@ -34,8 +34,10 @@ export class SellerService {
       where: { id },
     });
   }
+  
+  async getTotalSellers(): Promise<number> {
+    return this.prisma.seller.count();
+  }
 
 
-
-  // Implemente outros métodos conforme necessário
 }
