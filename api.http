@@ -78,4 +78,7 @@ Content-Type: application/json
   "productId": 1, 
   "quantity": 3,
   "sellerId": 2
-}     
+} 
+
+###
+GET http://localhost:3000/sales
