@@ -11,9 +11,9 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
   password String?
 }
 
@@ -29,4 +29,20 @@ model Product {
   price      Float
   category   Category @relation(fields: [categoryID], references: [id])
   categoryID Int
+  Sale       Sale[]
+}
+
+model Seller {
+  id    Int    @id @default(autoincrement())
+  name  String
+  sales Sale[]
+}
+
+model Sale {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  quantity  Int
+  sellerId  Int
+  product   Product @relation(fields: [productId], references: [id])
+  seller    Seller  @relation(fields: [sellerId], references: [id])
 }

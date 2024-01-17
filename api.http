@@ -60,3 +60,22 @@ Content-Type: application/json
 
 ### Exclusão de um Produto
 DELETE http://localhost:3000/product/:id
+
+
+### Criação de um vendedor
+POST http://localhost:3000/seller
+Content-Type: application/json
+
+{
+  "name": "Douglas Lombardi"
+}
+
+### Criação de uma venda
+POST http://localhost:3000/sales
+Content-Type: application/json
+
+{
+  "productId": 1, 
+  "quantity": 3,
+  "sellerId": 1
+}     
