@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Header, Res } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from '@prisma/client';
 
@@ -7,8 +7,12 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  findAll(): Promise<Category[]> {
-    return this.categoryService.findAll();
+  @Header('Content-Range', 'categorys 0-10/100')
+  async findAll(@Res() res): Promise<Category[]> {
+    const category = await this.categoryService.findAll();
+    const total = await this.categoryService.getTotalCategorys(); // Adicione este método ao seu service para obter o número total de usuários
+    res.header('Content-Range', `categorys 0-${category.length}/${total}`);
+    return res.status(200).json(category);
   }
 
   @Get(':id')

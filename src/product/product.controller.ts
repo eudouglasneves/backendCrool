@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Header, Res } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from '@prisma/client';
 
@@ -7,8 +7,12 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  findAll(): Promise<Product[]> {
-    return this.productService.findAll();
+  @Header('Content-Range', 'products 0-10/100')
+  async findAll(@Res() res): Promise<Product[]> {
+    const product = await this.productService.findAll();
+    const total = await this.productService.getTotalProducts(); // Adicione este método ao seu service para obter o número total de usuários
+    res.header('Content-Range', `products 0-${product.length}/${total}`);
+    return res.status(200).json(product);
   }
 
   @Get(':id')

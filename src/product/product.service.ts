@@ -54,4 +54,7 @@ export class ProductService {
       where: { id },
     });
   }
+  async getTotalProducts(): Promise<number> {
+    return this.prisma.product.count();
+  }
 }

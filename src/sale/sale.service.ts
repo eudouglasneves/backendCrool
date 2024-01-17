@@ -75,4 +75,8 @@ export class SaleService {
 
     return sale;
   }
+
+  async getTotalSales(): Promise<number> {
+    return this.prisma.product.count();
+  }
 }

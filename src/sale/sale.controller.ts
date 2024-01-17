@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Header, Res } from '@nestjs/common';
 import { SaleService } from './sale.service';
 import { Sale, Prisma } from '@prisma/client';
 
@@ -7,8 +7,12 @@ export class SaleController {
   constructor(private readonly salesService: SaleService) {}
 
   @Get()
-  getAllSales(): Promise<Sale[]> {
-    return this.salesService.findAll();
+  @Header('Content-Range', 'sales 0-10/100')
+  async findAll(@Res() res): Promise<Sale[]> {
+    const sale = await this.salesService.findAll();
+    const total = await this.salesService.getTotalSales(); // Adicione este método ao seu service para obter o número total de usuários
+    res.header('Content-Range', `sales 0-${sale.length}/${total}`);
+    return res.status(200).json(sale);
   }
 
   @Get(':id')

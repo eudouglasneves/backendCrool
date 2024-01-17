@@ -34,4 +34,8 @@ export class CategoryService {
       where: { id },
     });
   }
+
+  async getTotalCategorys(): Promise<number> {
+    return this.prisma.product.count();
+  }
 }
